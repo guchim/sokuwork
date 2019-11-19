@@ -1,0 +1,34 @@
+<div class="container">
+    <h2 class="copy">求人募集作成編集ページ</h2>
+    <%= form_with scope: :offers, url: "/companies/offer/"+@offer.id.to_s, :method=>:patch do |f| %>
+        <div class="form-group">
+            <%=label_tag "offers-category", "職種のカテゴリー"%>
+            <%=f.select :category, [["飲食・フード","飲食・フード"],["接客・サービス","接客・サービス"],["販売","販売"],["オフィスワーク", "オフィスワーク"],["軽作業・配送","軽作業・配送"],["イベント・キャンペーン","イベント・キャンペーン"]],{ :prompt => "選択してください"}, class:"form-control", id:"offers-category", value: @offer.category%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-title", "タイトル"%>
+            <%=f.text_field :title, id:"offers-title", placeholder: "ファミマ即WORK店レジ業務経験必須!!", class:"form-control", value: @offer.title%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-date", "出勤日"%>
+            <%=f.date_field :date, id:"offers-date", class:"form-control col-md-2", value: @offer.date%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-start-time", "出勤時間"%>
+            <%=f.time_field :start_time, id:"offers-start-time", class:"form-control col-md-2", value: @offer.start_time%>
+            <p>〜</p>
+            <%=f.time_field :end_time, id:"offers-end-time", value:"%H:%M", min:'hh:mm:ss', max:'hh:mm:ss', class:"form-control col-md-2",value: @offer.end_time%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-contents", "業務内容"%>
+            <%=f.text_area :contents, id:"offers-contents", placeholder: "", class:"form-control", value: @offer.contents%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-caution", "注意事項"%>
+            <%=f.text_area :caution, id:"offers-caution", placeholder: "", class:"form-control", value: @offer.caution%>
+        </div>
+        <div class="text-right">
+            <%=submit_tag "募集する", class:"btn btn-primary"%>
+        </div>
+    <%end%>
+</div>
