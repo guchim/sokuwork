@@ -2,6 +2,9 @@
     <h2 class="copy">求人募集作成編集ページ</h2>
     <%= form_with scope: :offers, url: "/companies/offer/"+@offer.id.to_s, :method=>:patch do |f| %>
         <div class="form-group">
+            <%=f.file_field :images, multiple: true, class: "form-control" %>
+        </div>
+        <div class="form-group">
             <%=label_tag "offers-category", "職種のカテゴリー"%>
             <%=f.select :category, [["飲食・フード","飲食・フード"],["接客・サービス","接客・サービス"],["販売","販売"],["オフィスワーク", "オフィスワーク"],["軽作業・配送","軽作業・配送"],["イベント・キャンペーン","イベント・キャンペーン"]],{ :prompt => "選択してください"}, class:"form-control", id:"offers-category", value: @offer.category%>
         </div>

@@ -4,25 +4,31 @@
     color: black;
 }
 
-.top-img{
-    background-image: url(IMG_4925.JPG);
-    margin-top: -200px;
-    height: 1100px;
+.top-img1{
+    background-image: url(IMG_4925.jpg);
+    background-size: 100%;
+    height: 700px;
+    background-repeat: no-repeat;
+
 }
 
-.top-img {
-    text-align: right;
-    padding: 500px 50px 0px;
-}
-
-.top-img h1{
+.top-img1 h1{
+    padding-top: 150px;
     font-size: 70px;
     font-weight: bold;
+    text-align: right;
 }
 
 .top-text {
-    text-align: left;
     font-size: 20px;
     font-weight: bold;
-    padding: 50px 0px 0px 800px;
+    text-align: right;
+}
+
+.info-buttons{
+    margin: 40px 40px 0px 0px ;
+}
+
+.companies{
+    margin: 0px 0px 20px 0px ;
 }

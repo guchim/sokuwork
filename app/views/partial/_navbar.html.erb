@@ -5,32 +5,44 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <%=link_to "求人募集を探す", "/users", class: "nav-link active" %>
-        </li>          <li class="nav-item">
-          <%=link_to "人手を探す", "/companies", class: "nav-link active" %>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-md-auto text-right">
+      
         <%if current_user %>
-          <li class="nav-item">
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger sign"%>
-          </li>
+          <ul class="navbar-nav ml-md-auto text-right">
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger sign"%>
+              </li>
+          </ul>
         <%elsif current_company %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%=link_to "求人募集を探す", "/users", class: "nav-link active" %>
+          </li>          <li class="nav-item">
+            <%=link_to "人手を探す", "/companies", class: "nav-link active" %>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-md-auto text-right">
           <li class="nav-item">
             <%= link_to "求人を募集する", companies_offer_path, class: "btn btn-outline-warning sign"%>
             <%= link_to "ログアウト", destroy_company_session_path, method: :delete, class: "btn btn-outline-danger sign"%>
             <%= link_to "", companies_show_path, class: "fas fa-users"%>
           </li>
+        </ul>
         <%else%>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%=link_to "求人募集を探す", "/users", class: "nav-link active" %>
+          </li>          <li class="nav-item">
+            <%=link_to "人手を探す", "/companies", class: "nav-link active" %>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-md-auto text-right">
           <li class="nav-item"> 
             <%=link_to "個人用ログイン", "/users/sign_in", class: "btn btn-outline-primary sign"%>
           </li>
           <li class="nav-item">
             <%=link_to "企業様用ログイン", "/companies/sign_in", class: "btn btn-outline-warning sign"%>
           </li>
+        </ul>
         <%end%>
-      </ul>
     </div>
 </nav>

@@ -1,22 +1,18 @@
 <div class="container">
     <h2>個人様のページのトップです</h2>
     
-    <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">見出し１</th>
-                  <th scope="col">見出し２</th>
-                  <th scope="col">見出し３</th>
-                </tr>
-              </thead>
-              <tbody>
-            　<% @offers.each do |offer| %>
-                <tr>
-                  <td><%= offer.title%></td>
-                  <td><%= offer.date%></td>
-                  <td><%= offer.start_time%>〜<%= offer.end_time%></td>
-                </tr>
-            　<%end%>        
-              </tbody>
-            </table>
+    <div class="offer-list">
+      <div class="container">
+        <div class="row">
+          <% @offers.each do |offer| %>
+            <div class="col-md-4 col-sm-6">
+              <p><%= image_tag offer.images.to_s,class: "offer-img" %></p>
+              <h5><%= offer.title%></h5>
+              <p><%= offer.date%></p>
+              <p class="time"><%= offer.start_time%>〜<%= offer.end_time%></p>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
 </div>

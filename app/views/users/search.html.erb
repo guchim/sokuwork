@@ -1,1 +1,21 @@
-<h2>個人様の企業サーチページです</h2>
+<div class="container">
+    <h2>個人様の企業サーチページです</h2>
+    
+    <div class="offer-list">
+      <div class="container">
+        <div class="row">
+          <% @offers.each do |offer| %>
+            <div class="col-md-4 col-sm-6">
+              <p><%= image_tag offer.images.to_s,class: "offer-img" %></p>
+              <h5><%= offer.title%></h5>
+              <p><%= offer.date%></p>
+              <p class="time"><%= offer.start_time%>〜<%= offer.end_time%></p>
+              <div class="detail-button">
+                <a class ="btn btn-outline-info" href="/companies/show/<%=offer.id%>">詳細</a>
+              </div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+</div>
