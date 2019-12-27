@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_10_101801) do
+ActiveRecord::Schema.define(version: 2019_12_23_101634) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -35,12 +35,14 @@ ActiveRecord::Schema.define(version: 2019_12_10_101801) do
   create_table "offers", force: :cascade do |t|
     t.string "images"
     t.integer "category_id"
+    t.integer "walfare_id"
     t.string "title", null: false
     t.date "date", null: false
     t.string "start_time", null: false
     t.string "end_time", null: false
     t.text "contents", null: false
-    t.text "caution", null: false
+    t.text "cautions", null: false
+    t.integer "pay", null: false
     t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -57,6 +59,12 @@ ActiveRecord::Schema.define(version: 2019_12_10_101801) do
     t.string "name", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "walfares", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

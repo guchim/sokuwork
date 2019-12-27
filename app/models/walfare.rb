@@ -1,0 +1,3 @@
+class Walfare < ApplicationRecord
+    has_many:offers, dependent: :destroy
+end

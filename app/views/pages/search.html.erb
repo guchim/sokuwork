@@ -1,0 +1,17 @@
+<div class="container">
+        <h2>求人募集検索結果</h2>
+        <div class="offer-list">
+          <div class="container">
+            <div class="row">
+              <% @offer.each do |offer| %>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <p><%= image_tag offer.images.to_s,class: "offer-img" %></p>
+                  <h5><%= offer.title%></h5>
+                  <p><%= offer.date%></p>
+                  <p class="time"><%= offer.start_time%>〜<%= offer.end_time%></p>
+                </div>
+              <%end%>
+            </div>
+          </div>
+        </div>
+</div>
