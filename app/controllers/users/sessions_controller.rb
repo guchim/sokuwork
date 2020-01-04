@@ -32,7 +32,7 @@ class Users::SessionsController < Devise::SessionsController
     end 
   #ログアウト後のリダイレクト先
     def after_sign_out_path_for(resource)
-      users_home_path
+      root_path
     end 
     
 end

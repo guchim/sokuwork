@@ -1,2 +1,48 @@
-<h2>詳細ページ</h2>
-<p>この詳細ページより、この記事の投稿主業店舗とアポイントを取れるようにする</p>
+<div class="container col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <%=@offer.title%>
+      </div>
+      <div class="card-body">
+        <span class="badge badge-success"><%=@offer.category.name%></span>
+        <%=@offer.offer_walfares.each do |offer_walfare|%>
+        <span class="badge badge-success">
+            <%=offer_walfare.walfare.name%>
+        </span>
+        <%end%>
+        <table class="table table-bordered col-lg-8">
+          <tbody>
+            <tr>
+              <th scope="row"></th>
+              <td>Mark</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Mark</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Mark</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Mark</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Mark</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Mark</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Mark</td>
+            </tr>
+        </table>
+      </div>
+    </div>
+    
+
+</div>

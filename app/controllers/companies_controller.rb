@@ -4,22 +4,14 @@ class CompaniesController < ApplicationController
     
     def offer
         @categories = Category.all
+        @offer = Offer.new
+        @offer.offer_walfares.build
     end
     
     def create
-        @offer = Offer.create(
-            images:params["offers"]["images"],
-            category_id:params["offers"]["category_id"],
-            walfare_id:params["offers"]["walfare_id"],
-            title:params["offers"]["title"],
-            date:params["offers"]["date"],
-            start_time:params["offers"]["start_time"],
-            end_time:params["offers"]["end_time"],
-            contents:params["offers"]["contents"],
-            cautions:params["offers"]["cautions"],
-            pay:params["offers"]["pay"])
-        @offer.company_id = current_company.id
-        @offer.save
+        offer = Offer.create(offer_params)
+        offer.company_id = current_company.id
+        offer.save
         redirect_to "/companies/show"
     end
     
@@ -29,7 +21,7 @@ class CompaniesController < ApplicationController
     end
     
     def detail
-        offer = Offer.find(params["id"])
+        @offer = Offer.find(params["id"])
     end
 
     def destroy
@@ -39,29 +31,20 @@ class CompaniesController < ApplicationController
     end
     
     def edit
-        offer = Offer.find(params["id"])
+        @offer = Offer.find(params["id"])
+        @categories = Category.all
+        offer = Offer.new
+        offer.offer_walfares.build
     end
     
     def update
         offer = Offer.find(params["id"])
-        offer.category = params["offers"]["category"]
-        offer.title = params["offers"]["title"]
-        offer.date = params["offers"]["date"]
-        offer.start_time = params["offers"]["start_time"]
-        offer.end_time = params["offers"]["end_time"]
-        offer.contents = params["offers"]["contents"]
-        offer.cautions = params["offers"]["cautions"]
-        offer.images = params["offers"]["images"]
-        offer.save
+        offer.update(offer_params)
         redirect_to "/companies/show"
     end
     
-    private
-    
-    def company_params
-      params.require(:company).permit(:category_id,:title,:date,:start_time,:end_time,:contents,:cautions,:company_id,:images,:pay,:walfare_id)
-      params.require(:company).permit(:offers, walfare_id: [])
+    def offer_params
+        params.require(:offers).permit(:images, :category_id, :title, :date, :start_time, :end_time, :contents, :cautions, :payment, :address, :access, :belongings, :conditions, { :walfare_ids=> [] })
     end
-    
     
 end

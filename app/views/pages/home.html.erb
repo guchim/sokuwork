@@ -7,9 +7,69 @@
                     <p>即WORKは、「この時間だけ働きたい」働き手と<br>「この時間だけ働いてほしい」雇用主を結ぶ<br>マッチングアプリを提供しています。</p>
                     <p>飲食のホールやキッチンスタッフからオフィスワーク、<br>イベントスタッフ、モニター調査など<br>様々な職種でご利用いただいています。</p>
                     <div class="info-buttons">
-                        <a class="btn btn-primary users" href ="/users">求人を探している方は<br>こちら</a>
-                        <a class="btn btn-warning companies" href ="/companies">人手を探している方は<br>こちら</a>
+                        <a class="btn btn-primary users" href ="/users/sign_in">ログインはこちら</a>
+                        <a class="btn btn-warning companies" href ="/users/sign_up">新規登録はこちら</a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="top-search container">
+            <div class="search">
+                <h2>検索</h2>
+                <%= search_form_for @q, url: root_path do |f| %>
+                    <div class="form-group">
+                        <%=label_tag "offers-title", "キーワード"%>
+                        <%=f.search_field :title_cont, id:"offers-title", placeholder: "セブンイレブン、渋谷、新宿", class:"form-control col-md-6"%>
+                    </div>
+                    <div class="form-group">
+                        <%=label_tag "offers-category", "職種のカテゴリー"%><br>
+                        <%=f.collection_select :category_id_eq, @categories, :id, :name, :include_blank => '指定なし', id:"offers-category", class:"form-control"%>
+                    </div>
+                    <div class="form-group">
+                        <%=label_tag "offers-date", "出勤日"%>
+                        <%=f.date_field :date_eq, id:"offers-date", class:"form-control col-md-3"%>
+                    </div>
+                    <div class="form-group">
+                        <%=label_tag "walfare", "待遇" %><br>
+                        <%=f.collection_check_boxes :offer_walfares_walfare_id_in, @walfares, :id, :name, include_hidden: false do |b|%>
+                            <%= b.check_box%>
+                            <%= b.label%>
+                        <%end%>
+                    </div>
+                    <div class="form-group">
+                        <%=label_tag "offer-payment", "報酬"%><br>
+                        <%= f.radio_button 'payment_gteq', '',{:checked => true}%>
+                         指定なし
+                        <%= f.radio_button 'payment_gteq', '3000'%>
+                         ¥3,000~
+                        <%= f.radio_button 'payment_gteq', '5000'%>
+                         ¥5,000~
+                         <%= f.radio_button 'payment_gteq', '8000'%>
+                         ¥8,000~
+                         <%= f.radio_button 'payment_gteq', '10000'%>
+                         ¥10,000~
+                    </div>
+                    <div class="search-button">
+                        <%=submit_tag "検索する", class:"btn btn-primary"%>
+                    </div>
+                <%end%>
+            </div>
+            <div class="result">
+                <h2>検索結果</h2>
+                <div class="row">
+                  <% @offers.each do |offer| %>
+                    <div class="col-lg-4 col-md-6 col-sd-12">
+                      <div class="card">
+                        <p><%= image_tag offer.images.to_s, class: "offer-img card-img-top" %></p>
+                        <div class="card-body">
+                          <h6 class="card-title"><%= offer.title%></h6>
+                          <p class="card-text"><%= offer.date%><br><%= offer.start_time%>〜<%= offer.end_time%></p>
+                          <a class="btn btn-info information" href ="/companies/show/<%=offer.id%>">詳細</a>
+                          <h5 class="payment">¥<%=offer.payment.to_s(:delimited)%></h5>
+            　　          </div>
+                      </div>
+                    </div>
+                  <%end%>
                 </div>
             </div>
         </div>

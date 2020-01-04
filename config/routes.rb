@@ -21,6 +21,5 @@ Rails.application.routes.draw do
   #募集ページの編集
     get "/companies/show", to:"companies#show",　as:"companies_show"
     get "/companies/show/:id", to:"companies#detail"
-    get "/users", to:"users#home", as:"users_home"
     get "/users/search", to:"users#search", as:"users_search"
 end

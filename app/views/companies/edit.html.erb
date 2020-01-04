@@ -2,15 +2,23 @@
     <h2 class="copy">求人募集作成編集ページ</h2>
     <%= form_with scope: :offers, url: "/companies/offer/"+@offer.id.to_s, :method=>:patch do |f| %>
         <div class="form-group">
-            <%=f.file_field :images, multiple: true, class: "form-control" %>
+            <p>掲載する画像</p>
+            <%=f.file_field :images%>
         </div>
         <div class="form-group">
-            <%=label_tag "offers-category", "職種のカテゴリー"%>
-            <%=f.select :category, [["飲食・フード","飲食・フード"],["接客・サービス","接客・サービス"],["販売","販売"],["オフィスワーク", "オフィスワーク"],["軽作業・配送","軽作業・配送"],["イベント・キャンペーン","イベント・キャンペーン"]],{ :prompt => "選択してください"}, class:"form-control", id:"offers-category", value: @offer.category%>
+            <%=label_tag "offers-category", "職種のカテゴリー"%><br>
+            <%=f.select :category_id, options_from_collection_for_select(@categories, :id, :name),:include_blank => '選択してください', value: @offer.category, id:"offers-category", class:"form-control"%>
         </div>
         <div class="form-group">
             <%=label_tag "offers-title", "タイトル"%>
-            <%=f.text_field :title, id:"offers-title", placeholder: "ファミマ即WORK店レジ業務経験必須!!", class:"form-control", value: @offer.title%>
+            <%=f.text_field :title, id:"offers-title", class:"form-control col-md-6", value: @offer.title%>
+        </div>
+        <div class="form-group">
+            <p>福利厚生</p>
+            <%=f.collection_check_boxes :walfare_ids, Walfare.all, :id, :name, include_hidden: false do |b|%>
+                <%= b.check_box%>
+                <%= b.label%>
+            <%end%>
         </div>
         <div class="form-group">
             <%=label_tag "offers-date", "出勤日"%>
@@ -20,15 +28,36 @@
             <%=label_tag "offers-start-time", "出勤時間"%>
             <%=f.time_field :start_time, id:"offers-start-time", class:"form-control col-md-2", value: @offer.start_time%>
             <p>〜</p>
-            <%=f.time_field :end_time, id:"offers-end-time", value:"%H:%M", min:'hh:mm:ss', max:'hh:mm:ss', class:"form-control col-md-2",value: @offer.end_time%>
+            <%=f.time_field :end_time, id:"offers-end-time", class:"form-control col-md-2", value: @offer.end_time%>
         </div>
         <div class="form-group">
             <%=label_tag "offers-contents", "業務内容"%>
-            <%=f.text_area :contents, id:"offers-contents", placeholder: "", class:"form-control", value: @offer.contents%>
+            <%=f.text_area :contents, id:"offers-contents", class:"form-control", value: @offer.contents%>
         </div>
         <div class="form-group">
-            <%=label_tag "offers-caution", "注意事項"%>
-            <%=f.text_area :caution, id:"offers-caution", placeholder: "", class:"form-control", value: @offer.caution%>
+            <%=label_tag "offers-cautions", "注意事項"%>
+            <%=f.text_area :cautions, id:"offers-cautions", class:"form-control", value: @offer.cautions%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-belongings", "持ち物"%>
+            <%=f.text_field :belongings, id:"offers-belongings", class:"form-control", value: @offer.belongings%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-conditions", "働くための条件"%>
+            <%=f.text_area :conditions, id:"offers-conditions", class:"form-control", value: @offer.conditions%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-address", "住所"%>
+            <%=f.text_field :address, id:"offers-address", class:"form-control", value: @offer.address%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-access", "アクセス"%>
+            <%=f.text_field :access, id:"offers-access", class:"form-control", value: @offer.access%>
+        </div>
+        <div class="form-group">
+            <%=label_tag "offers-pay", "報酬"%>
+            <%=f.text_field :payment, id:"offers-pay", class:"form-control col-md-1", value: @offer.payment%>
+            <p>円</p>
         </div>
         <div class="text-right">
             <%=submit_tag "募集する", class:"btn btn-primary"%>

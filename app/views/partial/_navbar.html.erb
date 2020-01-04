@@ -7,6 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       
         <%if current_user %>
+      　　<ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%=link_to "ログイン", "/users/sign_in", class: "nav-link active" %>
+          </li>          <li class="nav-item">
+            <%=link_to "新規登録", "/users/sign_up", class: "nav-link active" %>
+          </li>
+        </ul>
           <ul class="navbar-nav ml-md-auto text-right">
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger sign"%>
@@ -15,9 +22,9 @@
         <%elsif current_company %>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <%=link_to "求人募集を探す", "/users", class: "nav-link active" %>
+            <%=link_to "ログインする", "/users", class: "nav-link active" %>
           </li>          <li class="nav-item">
-            <%=link_to "人手を探す", "/companies", class: "nav-link active" %>
+            <%=link_to "新規登録する", "/companies", class: "nav-link active" %>
           </li>
         </ul>
         <ul class="navbar-nav ml-md-auto text-right">
@@ -30,14 +37,14 @@
         <%else%>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <%=link_to "求人募集を探す", "/users", class: "nav-link active" %>
+            <%=link_to "ログイン", "/users/sign_in", class: "nav-link active" %>
           </li>          <li class="nav-item">
-            <%=link_to "人手を探す", "/companies", class: "nav-link active" %>
+            <%=link_to "新規登録", "/users/sign_up", class: "nav-link active" %>
           </li>
         </ul>
         <ul class="navbar-nav ml-md-auto text-right">
           <li class="nav-item"> 
-            <%=link_to "個人用ログイン", "/users/sign_in", class: "btn btn-outline-primary sign"%>
+            <%=link_to "求人掲載について", "/companies", class: "btn btn-outline-primary sign"%>
           </li>
           <li class="nav-item">
             <%=link_to "企業様用ログイン", "/companies/sign_in", class: "btn btn-outline-warning sign"%>
