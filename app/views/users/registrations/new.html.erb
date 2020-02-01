@@ -1,0 +1,63 @@
+<div class="main">
+  <div class="card devise-card">
+    <div class="form-wrap">
+      <div class="form-group text-center">
+        <h2 class="logo-img mx-auto text-primary">即WORK</h2>
+        <p class="text-primary">個人用のアカウント作成ページです</p>
+      </div>
+      <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), local: true do |f| %>
+
+        <div class="form-group">
+          <%=label_tag "name", "氏名"%>
+          <%= f.text_field :name, id:"name", autofocus: true, placeholder: "即働太郎", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%=label_tag "email", "メールアドレス"%>
+          <%= f.email_field :email,id:"email", autofocus: true, placeholder: "sokuwork@gmail.com", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%=label_tag "phone-number", "電話番号"%>
+          <%= f.text_field :phone_number, id:"phone-number", autofocus: true, placeholder: "090-1234-5678", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%=label_tag "password", "パスワード"%>
+          <%= f.password_field :password, id:"password", autocomplete: "off", placeholder: "", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%=label_tag "password-confirmation", "確認用パスワード"%>
+          <%= f.password_field :password_confirmation, id:"password-confirmation", autocomplete: "off", placeholder: "", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+            <%=label_tag "birthday", "誕生日"%>
+            <%=f.date_field :birthday, id:"birthday", class:"form-control"%>
+        </div>
+
+        <div class="form-group">
+          <p>性別</p>
+          <%= f.radio_button :gender, :男性, id:"male" %>
+          <%=label_tag "male", "男性"%>
+          <%= f.radio_button :gender, :女性, id:"female" %>
+          <%=label_tag "female", "女性"%>
+          <%= f.radio_button :gender, :その他, id:"other" %>
+          <%=label_tag "other", "その他"%>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "登録する", class: "btn btn-primary w-100" %>
+        </div>
+      <% end %>
+
+      <br>
+
+      <p class="devise-link">
+        アカウントをお持ちですか？
+        <%= link_to "サインインする", new_user_session_path %>
+      </p>
+    </div>
+  </div>
+</div>

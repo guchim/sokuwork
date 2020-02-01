@@ -1,0 +1,26 @@
+<div class="container">
+
+    <h3 class="copy">【<%=@company.name%>様】掲載中の求人</h3>
+    
+    <div class="offer-list">
+        <div class="row">
+          <% @offers.each do |offer| %>
+          <div class="col-lg-4 col-md-6 col-sd-12">
+            <div class="card search-card">
+              <p><%= image_tag offer.images.to_s, class: "offer-img card-img-top" %></p>
+              <div class="card-body">
+                <h6 class="card-title"><%= offer.title%></h6>
+                <p class="card-text"><%= offer.date.strftime("%Y年%m月%d日")%><br><%= offer.start_time%>〜<%= offer.end_time%></p>
+                <h5 class="payment">¥<%=offer.payment.to_s(:delimited)%></h5>
+                <div class="edit-buttons">
+                  <a href="/companies/offer/<%=offer.id%>" data-method="delete"><i class="fas fa-trash-alt trash-icon"></i></a>
+                  <a href="/companies/offer/<%=offer.id%>/edit"><i class="fas fa-edit edit-icon"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%end%>
+        </div>
+    </div>
+        
+</div>

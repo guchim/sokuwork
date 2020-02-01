@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 order-md-1 mb-4 setting-option">
+          <h4 class="d-flex align-items-center mb-3">
+            <span class="text-muted">マイページメニュー</span>
+          </h4>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <%=link_to "応募した求人の確認","/users/confirmation", class:"list-group-link"%>
+            </li>
+            <li class="list-group-item">
+              <%=link_to "プロフィールの設定", "/users/profile", class:"list-group-link"%>
+            </li>
+            <li class="list-group-item">
+              <%=link_to "個人情報の設定", "/users/edit", class:"list-group-link"%>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-8 order-md-2 setting-profile">
+          <h4 class="mb-3">応募した求人の確認</h4>
+                <%@offers.each do |offer|%>
+                <div class="card confirmation-card">
+                  <h5 class="card-header bg-warning"><%=offer.title%></h5>
+                  <div class="card-body">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th class="text-nowrap">日時</th>
+                          <td><%=offer.date.strftime("%Y年%m月%d日")%><br><%= offer.start_time%>〜<%= offer.end_time%></td>
+                        </tr>
+                        <tr>
+                          <th>仕事内容</th>
+                          <td><%= simple_format(offer.contents) %></td>
+                        </tr>
+                        <tr>
+                          <th>注意事項</th>
+                          <td><%=simple_format(offer.cautions)%></td>
+                        </tr>
+                        <tr>
+                          <th>持ち物</th>
+                          <td><%=offer.belongings%></td>
+                        </tr>
+                        <tr>
+                          <th>働くための条件</th>
+                          <td><%=simple_format(offer.conditions)%></td>
+                        </tr>
+                        <tr>
+                          <th>住所</th>
+                          <td><%=offer.address%></td>
+                        </tr>
+                        <tr>
+                          <th>報酬</th>
+                          <td>¥<%=offer.payment.to_s(:delimited)%></td>
+                        </tr>
+                    </table>
+                  </div>
+                </div>
+                <%end%>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

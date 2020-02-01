@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 order-md-1 mb-4 setting-option">
+          <h4 class="d-flex align-items-center mb-3">
+            <span class="text-muted">マイページメニュー</span>
+          </h4>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <%=link_to "応募した求人の確認","/users/confirmation", class:"list-group-link"%>
+            </li>
+            <li class="list-group-item">
+              <%=link_to "プロフィールの設定", "/users/profile", class:"list-group-link"%>
+            </li>
+            <li class="list-group-item">
+              <%=link_to "個人情報の設定", "/users/edit", class:"list-group-link"%>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-8 order-md-2 setting-profile">
+          <h4 class="mb-3">プロフィールの設定</h4>
+          <div class="text-left">
+            <%if @user_profile.present? %>
+              <%=image_tag @user_profile.profile_photo.to_s, class: "profile-icon"%>
+            <%else%>
+              <i class="far fa-user-circle profile-icon">
+            <%end%>
+          </div>
+          <%= form_with scope: :user_profiles, url: "/users/profile/edit", :method=>:patch do |f| %>
+            <p>現在のプロフィールの画像</p>
+            <%=f.file_field :profile_photo%>
+            <%= f.hidden_field :images_cache %>
+            <div class="form-group">
+              <%=label_tag "introduction", "紹介文"%>
+              <%=f.text_area :introduction, :rows => "5", id:"introduction", class:"form-control", value: @user_profile.introduction%>
+            </div>
+            <div class="text-right">
+              <%=f.submit "保存する", class:"btn btn-primary"%>
+            </div>
+          <%end%>
+        </div>
+    </div>
+</div>

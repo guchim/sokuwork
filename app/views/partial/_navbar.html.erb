@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <%=link_to "即WORK", "/", class: "navbar-brand"%>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+        <%if current_user %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%=link_to "/search", class: "nav-link active" do%>
+              <i class="fas fa-search"></i>求人を探す
+            <%end%>
+          </li>
+          </li>
+          <li class="nav-item">
+            <%=link_to destroy_user_session_path, method: :delete, class: "nav-link active" do%>
+              <i class="fas fa-sign-out-alt"></i>ログアウト
+            <%end%>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-md-auto text-right">
+          <li class="nav-item">
+            <%if @user_profile.present? %>
+              <%=link_to "/users/profile", class: "nav-link active" do%>
+                <%=image_tag @user_profile.profile_photo.to_s, class:"nav-icon"%>
+              <%end%>
+            <%else%>
+              <%=link_to "/users/confirmation", class: "nav-link active" do%>
+                <%=image_tag "/assets/unknown.jpg", class:"nav-icon"%>
+              <%end%>
+            <%end%>
+          </li>
+        </ul>
+        
+        
+        <%elsif current_company %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%=link_to "/companies/show", class: "nav-link active" do%>
+              <i class="fas fa-clipboard-list"></i>掲載中の求人
+            <%end%>
+          </li>
+          <li class="nav-item">
+            <%=link_to "/companies/offer", class: "nav-link active" do%>
+              <i class="far fa-list-alt"></i>求人を募集する
+            <%end%>
+          </li>
+          <li class="nav-item">
+            <%=link_to destroy_company_session_path, method: :delete, class: "nav-link active" do%>
+              <i class="fas fa-sign-out-alt"></i>ログアウト
+            <%end%>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-md-auto text-right">
+          <li class="nav-item">
+            <%=link_to "/companies/confirmation", class: "nav-link active" do%>
+              <i class="far fa-building company-icon"></i>
+            <%end%>
+          </li>
+        </ul>
+        
+        
+        <%else%>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%=link_to "/search", class: "nav-link active" do%>
+              <i class="fas fa-search"></i>求人を探す
+            <%end%>
+          </li>
+          <li class="nav-item">
+            <%=link_to "/users/sign_in", class: "nav-link active" do%>
+              <i class="fas fa-sign-in-alt"></i>ログイン
+            <%end%>
+          </li>
+          <li class="nav-item">
+            <%=link_to "/users/sign_up", class: "nav-link active" do%>
+              <i class="fas fa-user-plus"></i>新規登録
+            <%end%>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-md-auto text-right">
+          <li class="nav-item">
+            <%=link_to "企業様用ログイン", "/companies/sign_in", class: "btn btn-outline-warning sign"%>
+          </li>
+        </ul>
+        <%end%>
+    </div>
+</nav>

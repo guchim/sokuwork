@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 order-md-1 mb-4 setting-option">
+          <h4 class="d-flex align-items-center mb-3">
+            <span class="text-muted">マイページメニュー</span>
+          </h4>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <%=link_to "応募した求人の確認","/users/confirmation", class:"list-group-link"%>
+            </li>
+            <li class="list-group-item">
+              <%=link_to "プロフィールの設定", "/users/profile", class:"list-group-link"%>
+            </li>
+            <li class="list-group-item">
+              <%=link_to "個人情報の設定", "/users/edit", class:"list-group-link"%>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-8 order-md-2 setting-profile">
+          <h4 class="mb-3">個人情報の設定</h4>
+          <form class="needs-validation" novalidate>
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), local: true do |f| %>
+                  <div class="form-group">
+                    <%=label_tag "user-name", "名前"%>
+                    <%= f.text_field :name, autofocus: true, id: "user-name", placeholder: "", class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%=label_tag "user-mail", "メールアドレス"%>
+                    <%= f.email_field :email, autofocus: true, id: "user-mail", placeholder: "", class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%=label_tag "phone-number", "電話番号"%>
+                    <%= f.text_field :phone_number, id:"phone-number", autofocus: true, placeholder: "", class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%=label_tag "user-password", "新しいパスワード"%>
+                    <%= f.password_field :password, id: "user-password", autocomplete: "off", placeholder: "", class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%=label_tag "user-password-confirmation", "新しいパスワード （確認用）"%>
+                    <%= f.password_field :password_confirmation, id: "user-password-confirmation", autocomplete: "off", placeholder: "", class: "form-control" %>
+                  </div>
+                  <div class="actions">
+                    <%= f.submit "保存する", class: "btn btn-primary w-100" %>
+                  </div>
+                <% end %>
+             </div>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<body>
+    <header>
+    <div class="top-search container">
+        <div class="search">
+            <h2 class="search-title">検索結果一覧</h2>
+            <div class="card search-card">
+                <div class="card-body">
+                <%= search_form_for @q, url: pages_search_path do |f| %>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                              <th class="text-nowrap"><%=label_tag "offers-title", "キーワード"%></th>
+                              <td><%=f.search_field :title_or_contents_or_cautions_or_address_or_access_or_conditions_cont, id:"offers-title", placeholder: "例）セブンイレブン、渋谷、新宿", class:"form-control col-lg-5"%></td>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                              <th><%=label_tag "offers-category", "職種"%></th>
+                              <td><%=f.collection_select :category_id_eq, @categories, :id, :name, {include_blank: "指定なし"}, {class: "form-control col-lg-3 col-md-4"}%></td>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                              <th><%=label_tag "offers-date", "出勤日"%></th>
+                              <td><%=f.date_field :date_eq, id:"offers-date", class:"form-control col-lg-3 col-md-4"%></td>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                              <th><%=label_tag "walfare", "待遇" %></th>
+                              <td>
+                                <%=f.collection_check_boxes :offer_walfares_walfare_id_in, @walfares, :id, :name, include_hidden: false do |b|%>
+                                    <%= b.check_box%>
+                                    <%= b.label%>
+                                <%end%>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th><%=label_tag "offer-payment", "報酬"%></th>
+                              <td>
+                                <%= f.radio_button 'payment_gteq', '',{:checked => true}%>
+                                 指定なし
+                                <%= f.radio_button 'payment_gteq', '3000'%>
+                                 ¥3,000~
+                                <%= f.radio_button 'payment_gteq', '5000'%>
+                                 ¥5,000~
+                                <%= f.radio_button 'payment_gteq', '8000'%>
+                                 ¥8,000~
+                                <%= f.radio_button 'payment_gteq', '10000'%>
+                                 ¥10,000~
+                              </td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="search-button">
+                        <%=submit_tag "検索する", class:"btn btn-primary"%>
+                    </div>
+                <%end%>
+                </div>
+            </div>
+        </div>
+        <div class="result">
+            <div class="row">
+            <%if @offer.present?%>
+                <% @offers.each do |offer| %>
+                    <div class="col-lg-4 col-md-6 col-sd-12">
+                        <div class="card offer-card">
+                            <p><%= image_tag offer.images.to_s, class: "offer-img card-img-top" %></p>
+                            <div class="card-body">
+                                <h6 class="card-title"><%= offer.title%></h6>
+                                <p class="card-text"><%= offer.date.strftime("%Y年%m月%d日")%><br><%= offer.start_time%>〜<%= offer.end_time%></p>
+                                <a class="btn btn-info information" href ="/detail/<%=offer.id%>">詳細</a>
+                                <h5 class="payment">¥<%=offer.payment.to_s(:delimited)%></h5>
+                　　          </div>
+                        </div>
+                    </div>
+                <%end%>
+                      <%= paginate @offers %>
+            <%else%>
+            <div class="container">
+                <h5 class="text-caution">検索結果がありませんでした</h5>
+            </div>
+            <%end%>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
