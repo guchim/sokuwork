@@ -12,7 +12,7 @@ class PagesController < ApplicationController
         end
         @q = Offer.ransack(params[:q])
         @offer = @q.result(distinct: true)
-        @offers = @offer.page(params[:page]).per(15)
+        @offers = @offer.page(params[:page]).per(3)
         @categories = Category.all
         @walfares = Walfare.all
     end

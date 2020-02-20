@@ -1,5 +1,4 @@
 <body>
-    <header>
     <div class="top-search container">
         <div class="search">
             <h2 class="search-title">検索結果一覧</h2>
@@ -61,28 +60,27 @@
         </div>
         <div class="result">
             <div class="row">
-            <%if @offer.present?%>
-                <% @offers.each do |offer| %>
-                    <div class="col-lg-4 col-md-6 col-sd-12">
-                        <div class="card offer-card">
-                            <p><%= image_tag offer.images.to_s, class: "offer-img card-img-top" %></p>
-                            <div class="card-body">
-                                <h6 class="card-title"><%= offer.title%></h6>
-                                <p class="card-text"><%= offer.date.strftime("%Y年%m月%d日")%><br><%= offer.start_time%>〜<%= offer.end_time%></p>
-                                <a class="btn btn-info information" href ="/detail/<%=offer.id%>">詳細</a>
-                                <h5 class="payment">¥<%=offer.payment.to_s(:delimited)%></h5>
-                　　          </div>
+                <%if @offer.present?%>
+                    <% @offers.each do |offer| %>
+                        <div class="col-lg-4 col-md-6 col-sd-12">
+                            <div class="card offer-card">
+                                <p><%= image_tag offer.images.to_s, class: "offer-img card-img-top" %></p>
+                                <div class="card-body">
+                                    <h6 class="card-title"><%= offer.title%></h6>
+                                    <p class="card-text"><%= offer.date.strftime("%Y年%m月%d日")%><br><%= offer.start_time%>〜<%= offer.end_time%></p>
+                                    <a class="btn btn-info information" href ="/detail/<%=offer.id%>">詳細</a>
+                                    <h5 class="payment">¥<%=offer.payment.to_s(:delimited)%></h5>
+                    　　          </div>
+                            </div>
                         </div>
-                    </div>
-                <%end%>
-                      <%= paginate @offers %>
-            <%else%>
-            <div class="container">
-                <h5 class="text-caution">検索結果がありませんでした</h5>
-            </div>
-            <%end%>
+                    <%end%>
+                <%else%>
+                <div class="container">
+                    <h5 class="text-caution">検索結果がありませんでした</h5>
                 </div>
+                <%end%>
             </div>
         </div>
-    </header>
+        <div class="pagenation"><%= paginate @offers %></div>
+    </div>
 </body>
