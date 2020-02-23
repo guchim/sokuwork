@@ -6,7 +6,7 @@ jobs:
       - image: circleci/ruby:2.6.3-node-browsers
         environment:
           RAILS_ENV: test
-      - image: circleci/mysql:5.7-ram
+      - image: circleci/mysql:5.7
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
     working_directory: ~/sokuwork
