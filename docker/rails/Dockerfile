@@ -38,6 +38,7 @@ RUN apk update \
  && gem install -q -N pkg-config \
  && gem install -q -N rails -v 5.2.3 \
  && gem install -q -N mysql2 -v 0.4.10
+ && gem install -q -N devise -v 4.6.2
 
 WORKDIR $APP
 COPY Gemfile Gemfile.lock $CONTAINER_ROOT
@@ -48,3 +49,4 @@ ENV RAILS_SERVE_STATIC_FILES=true \
     TERM=xterm
 EXPOSE $SERVER_PORT
 EXPOSE $MYSQL_PORT
+RUN mkdir -p tmp/sockets

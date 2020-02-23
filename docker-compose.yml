@@ -31,7 +31,16 @@ services:
      - "bundle:/usr/local/bundle"
    depends_on:
      - database
-
+ server:
+   build:
+     context: containers/nginx
+   volumes:
+     - ./nginx/log:/var/log/nginx
+     - "bundle:/usr/local/bundle"
+   depends_on:
+     - app
+   ports:
+     - 80:80
 volumes:
  bundle:
    driver: local
