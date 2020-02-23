@@ -14,4 +14,14 @@ default_container:
         MYSQL_ALLOW_EMPTY_PASSWORD: true
   working_directory: ~/sokuwork
 
-
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
