@@ -1,37 +1,37 @@
 version: 2
 jobs:
-　build:
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.6.3-node-browsers
         environment:
           RAILS_ENV: test
       - image: circleci/mysql:5.7-ram
-       environment:
-         MYSQL_ALLOW_EMPTY_PASSWORD: true
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
     working_directory:　
     steps:
-     - checkout
-     - restore_cache:
-         keys:
-           - v1-dependencies-{{ checksum "Gemfile.lock" }}
-           - v1-dependencies-
-     - run:
-         name: install dependencies
-         command: |
-           gem install bundler -v 2.0.1
-           bundle install --jobs=4 --retry=3 --path vendor/bundle
-     - save_cache:
-         paths:
-           - ./vendor/bundle
-         key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-     - run:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.0.1
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s    
-     - run: bundle exec rake db:create
-     - run: bundle exec rake db:schema:load
-     - run: gem install bundler
-     - run:
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      - run: gem install bundler
+      - run:
          name: Run rspec
          command: |
            mkdir /tmp/test-results
@@ -39,9 +39,9 @@ jobs:
            bundle exec rspec --format progress --color --format documentation
            
      # collect reports
-     - store_test_results:
+      - store_test_results:
           path: /tmp/test-results
-     - store_artifacts:
+      - store_artifacts:
           path: /tmp/test-results
           destination: test-results
 
