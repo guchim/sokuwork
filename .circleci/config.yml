@@ -9,7 +9,7 @@ jobs:
       - image: circleci/mysql:5.7-ram
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
-    working_directory:　
+    working_directory: ~/sokuwork
     steps:
       - checkout
       - restore_cache:
