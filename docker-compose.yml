@@ -14,7 +14,7 @@ services:
  app:
    build:
      context: .
-     dockerfile: ./docker/development/Dockerfile
+     dockerfile: ./docker/rails/Dockerfile
    command: >
      bash -c "
        yarn install --check-files &&
@@ -33,7 +33,7 @@ services:
      - database
  server:
    build:
-     context: containers/nginx
+     context: docker/nginx
    volumes:
      - ./nginx/log:/var/log/nginx
      - "bundle:/usr/local/bundle"
