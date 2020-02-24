@@ -1,51 +1,58 @@
-version: 2.1
+version: 2
 jobs:
- build:
-   docker:
-   - image: circleci/ruby:2.6.3-node
-     environment:
-       RAILS_ENV: test
-   - image: circleci/mysql:5.7-ram
-     environment:
-       MYSQL_DATABASE: sokuwork_test
-       MYSQL_ALLOW_EMPTY_PASSWORD: true
-       MYSQL_ROOT_HOST: '%'
-       MYSQL_USER: root
-   working_directory: ~/sokuwork
-   steps:
-   - checkout
-   - restore_cache:
-       keys:
-       - v1-dependencies-{{ checksum "Gemfile.lock" }}
-       - v1-dependencies-
-   - run:
-       name: install dependencies
-       command: |
-         gem install bundler -v 2.0.1
-         bundle install --jobs=4 --retry=3 --path vendor/bundle
-   - save_cache:
-       paths:
-       - ./vendor/bundle
-       key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-   # Database setup
-   - run:
-       name: Prepare db
-       command: |
-         bundle exec rails db:schema:load --trace
-   # run tests!
-   - run:
-       name: Run rspec
-       command: |
-         mkdir /tmp/test-results
-         TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-         bundle exec rspec --format progress --color --format documentation
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.6.3-node-browsers
+        environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: "root"
+          DB_PASSWORD: "password"
 
-   # collect reports
-   - store_test_results:
-       path: /tmp/test-results
-   - store_artifacts:
-       path: /tmp/test-results
-       destination: test-results
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: ""
+          MYSQL_DATABASE: sokuwork_test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_USER: root
+    working_directory: ~/sokuwork
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.0.1
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s    
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      - run: gem install bundler
+      - run:
+         name: Run rspec
+         command: |
+           mkdir /tmp/test-results
+           TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+           bundle exec rspec --format progress --color --format documentation
+           
+     # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
 
           
           
