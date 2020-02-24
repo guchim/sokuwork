@@ -6,9 +6,18 @@ jobs:
       - image: circleci/ruby:2.6.3-node-browsers
         environment:
           RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: "root"
+          DB_PASSWORD: "password"
+          
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: ""
+          MYSQL_DATABASE: sokuwork_test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_USER: root
     working_directory: ~/sokuwork
     steps:
       - checkout
