@@ -16,7 +16,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: ""
           MYSQL_DATABASE: sokuwork_test
           MYSQL_HOST: 127.0.0.1
-          MYSQL_ROOT_HOST: "%"
           MYSQL_USER: root
     working_directory: ~/sokuwork
     steps:
