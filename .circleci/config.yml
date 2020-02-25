@@ -8,9 +8,10 @@ jobs:
    - image: circleci/mysql:5.7-ram
      environment:
        MYSQL_DATABASE: sokuwork_test
+       MYSQL_USER: root
        MYSQL_ALLOW_EMPTY_PASSWORD: true
        MYSQL_ROOT_HOST: '%'
-       MYSQL_USER: root
+       MYSQL_PORT: 3306
    working_directory: ~/sokuwork
    steps:
    - checkout
@@ -31,7 +32,7 @@ jobs:
    - run:
        name: Prepare db
        command: |
-         bundle exec rails db:schema:load --trace
+         bin/rails db:schema:load --trace
    # run tests!
    - run:
        name: Run rspec
