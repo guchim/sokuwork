@@ -2,23 +2,18 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("MYSQL_USERNAME", "root") %>
-  password: <%= ENV.fetch("MYSQL_PASSWORD", "root") %>
-  host: <%= ENV.fetch("DB_HOST") { "database" } %>
+  username: root
+  password:
  
 development:
   <<: *default
   database: sokuwork_development
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  pool: 5
-  username: <%= ENV.fetch("MYSQL_USER", "root") %>
-  password: ""
-  host: <%= ENV.fetch("MYSQL_HOST", "127.0.0.1") %>
-  port: <%= ENV.fetch("MYSQL_PORT", "3306") %>
-  database: <%= ENV.fetch("MYSQL_DATABASE", "sokuwork_test") %>
+  <<: *default
+  database: circleci-example-for-rails_test
+  host: <%= ENV['MYSQL_ROOT_HOST'] || '127.0.0.1' %>
+
 
 production:
   <<: *default
