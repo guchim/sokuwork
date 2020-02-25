@@ -11,7 +11,7 @@ development:
 
 test:
   <<: *default
-  database: circleci-example-for-rails_test
+  database: sokuwork_test
   host: <%= ENV['MYSQL_ROOT_HOST'] || '127.0.0.1' %>
 
 
