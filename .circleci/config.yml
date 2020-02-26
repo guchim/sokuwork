@@ -10,7 +10,7 @@ jobs:
           MYSQL_USERNAME: "root"
           MYSQL_PASSWORD: "root"
       - image: circleci/mysql:5.7
-          MYSQL_ROOT_PASSWORD: 'root'
+          MYSQL_PASSWORD: 'root'
 
 
    working_directory: ~/sokuwork
