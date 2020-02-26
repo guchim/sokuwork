@@ -2,16 +2,15 @@ version: 2.1
 jobs:
  build:
    docker:
-   - image: circleci/ruby:2.6.3-node
-     environment:
-       RAILS_ENV: test
-   - image: circleci/mysql:5.7-ram
-     environment:
-       MYSQL_DATABASE: sokuwork_test
-       MYSQL_USER: root
-       MYSQL_ALLOW_EMPTY_PASSWORD: true
-       MYSQL_ROOT_HOST: '%'
-       MYSQL_PORT: 3306
+   docker:
+      # specify the version you desire here
+     - image: circleci/ruby:2.6.3-node-browsers
+       environment:
+         RAILS_ENV: test
+         DB_HOST: 127.0.0.1
+         DB_USERNAME: "root"
+     - image: circleci/mysql:5.7
+
    working_directory: ~/sokuwork
    steps:
    - checkout
