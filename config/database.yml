@@ -13,8 +13,6 @@ test:
   <<: *default
   database: sokuwork_test
   host: <%= ENV['MYSQL_ROOT_HOST'] || '127.0.0.1' %>
-  username: <%= ENV["MYSQL_USER"] %>
-  port: <%= ENV["MYSQL_PORT"] %>
 
 
 production:
