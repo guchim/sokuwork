@@ -10,13 +10,11 @@ development:
   database: sokuwork_development
 
 test:
-  <<: *default
   database: sokuwork_test
   host: <%= ENV['MYSQL_ROOT_HOST'] %>
   username: <%= ENV["MYSQL_USER"] %>
   password: "root"
   port: <%= ENV["MYSQL_PORT"] %>
-  database: <%= ENV["MYSQL_DATABASE"] %>
 
 
 production:
