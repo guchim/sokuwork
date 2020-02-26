@@ -9,7 +9,8 @@ jobs:
           MYSQL_HOST: 127.0.0.1
           MYSQL_USERNAME: "root"
           MYSQL_PASSWORD: "root"
-      - image: circleci/mysql:5.7
+      - image: circleci/mysql:5.7-ram
+        environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
 
    working_directory: ~/sokuwork
