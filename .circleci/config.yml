@@ -11,7 +11,7 @@ jobs:
           MYSQL_PASSWORD: "root"
       - image: circleci/mysql:5.7-ram
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: 'root'
 
     working_directory: ~/sokuwork
     steps:
