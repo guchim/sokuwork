@@ -85,7 +85,7 @@ jobs:
       - store_artifacts:
           path: ~/tmp/test-results
           destination: test-results
-workflows:
+workflow:
 build:
   jobs:
     - fetch_source_code
