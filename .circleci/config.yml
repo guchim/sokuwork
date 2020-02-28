@@ -1,8 +1,8 @@
 version: 2.1
 executors:
 default_container:
-  docker: 
-    - image: circleci/ruby:2.6.3-node
+  docker:
+    - image: circleci/ruby:2.6.1-node
       environment:
         RAILS_ENV: test
         BUNDLE_JOBS: 4
@@ -13,7 +13,7 @@ default_container:
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: true
   working_directory: ~/sokuwork
-    
+
 commands:
 install_bundler:
   description: Bundler install
@@ -29,7 +29,7 @@ jobs:
       - save_cache:
           key: v2-sokuwork-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/sokuwrok
+            - ~/sokuwork
   bundle_dependencies:
     executor:
       name: default_container
@@ -85,7 +85,7 @@ jobs:
       - store_artifacts:
           path: ~/tmp/test-results
           destination: test-results
-workflow:
+workflows:
 build:
   jobs:
     - fetch_source_code
