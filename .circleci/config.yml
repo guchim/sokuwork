@@ -110,9 +110,3 @@ workflows:
       - rspec:
           requires: # bundle_dependenciesの後にrspecを実行する
             - bundle_dependencies
-
-          
-          
-          
-          
-          
