@@ -3,15 +3,12 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.6.3-node-browsers
+      - image: circleci/ruby:2.6.3-node
         environment:
           RAILS_ENV: test
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_USERNAME: "root"
-          MYSQL_PASSWORD: "root"
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_ROOT_PASSWORD: 'root'
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
    
     working_directory: ~/sokuwork
     steps:
@@ -31,9 +28,11 @@ jobs:
         key: v1-dependencies-{{ checksum "Gemfile.lock" }}
     # Database setup
     - run:
+       command: mv ./config/database.yml.ci ./config/database.yml
+    - run:
         name: Prepare db
         command: |
-          bin/rails db:create db:schema:load --trace
+          bin/rails db:create db:migrate
     # run tests!
     - run:
         name: Run rspec
