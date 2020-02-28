@@ -1,18 +1,18 @@
 version: 2.1
 executors:
-  default_container:
-    docker:
-      - image: circleci/ruby:2.6.3-node-browsers
-        environment:
-          RAILS_ENV: test
-          BUNDLE_JOBS: 4
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-          BUNDLER_VERSION: 2.0.1
-      - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-    working_directory: ~/sokuwork
+default_container:
+  docker: 
+    - image: circleci/ruby:2.6.3-node-browsers
+      environment:
+        RAILS_ENV: test
+        BUNDLE_JOBS: 4
+        BUNDLE_RETRY: 3
+        BUNDLE_PATH: vendor/bundle
+        BUNDLER_VERSION: 2.0.1
+    - image: circleci/mysql:5.7
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+  working_directory: ~/sokuwork
     
 commands:
 install_bundler:
