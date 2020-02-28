@@ -1,100 +1,53 @@
 version: 2.1
-executors:
-default_container:
-  docker:
-    - image: circleci/ruby:2.6.1-node
-      environment:
-        RAILS_ENV: test
-        BUNDLE_JOBS: 4
-        BUNDLE_RETRY: 3
-        BUNDLE_PATH: vendor/bundle
-        BUNDLER_VERSION: 2.0.1
-    - image: circleci/mysql:5.7-ram
-      environment:
-        MYSQL_ALLOW_EMPTY_PASSWORD: true
-  working_directory: ~/sokuwork
-
-commands:
-install_bundler:
-  description: Bundler install
-  steps:
-    - run: gem install bundler -v 2.0.1
-
 jobs:
-  fetch_source_code:
-    executor:
-      name: default_container
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.6.3-node-browsers
+        environment:
+          RAILS_ENV: test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_USERNAME: "root"
+          MYSQL_PASSWORD: "root"
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ROOT_PASSWORD: 'root'
+   
+    working_directory: ~/sokuwork
     steps:
-      - checkout
-      - save_cache:
-          key: v2-sokuwork-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/sokuwork
-  bundle_dependencies:
-    executor:
-      name: default_container
-    steps:
-      - restore_cache:
-          key: v2-sokuwork-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
-      - install_bundler
-      - run:
-          name: Bundle Install Dependencies
-          command: |
-            bundle install
-      - save_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-  rspec:
-    executor:
-      name: default_container
-    steps:
-      - restore_cache:
-          key: v2-sokuwork-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Watting stand up database
-          command: |
-            dockerize -wait \
-            tcp://127.0.0.1:3306 -timeout 120s
-      # Database setup
-      - run: mv ./config/database.yml.ci ./config/database.yml
-      - install_bundler
-      - run:
-          name: Testing DB migration and seed
-          command: |
-            bundle exec rails db:create db:migrate db:seed db:drop
-      - run:
-          name: Run rspec
-          command: |
-            mkdir /tmp/test-results
-            mkdir -p ~/rspec
-            bundle exec rails db:create db:migrate
-            TEST_FILES="$(circleci tests glob \"spec/**/*_spec.rb\" | circleci tests split --split-by=timings)"
-            bundle exec rspec --require rails_helper \
-                              --color \
-                              --format progress \
-                              --format RspecJunitFormatter \
-                              --out ~/rspec/rspec.xml
-       # collect reports
-      - store_test_results:
-          path: ~/rspec
-      - store_artifacts:
-          path: ~/tmp/test-results
-          destination: test-results
-workflows:
-build:
-  jobs:
-    - fetch_source_code
-    - bundle_dependencies:
-        requires:
-          - fetch_source_code
-    - rspec:
-        requires:
-          - bundle_dependencies
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "Gemfile.lock" }}
+        - v1-dependencies-
+    - run:
+        name: install dependencies
+        command: |
+          gem install bundler -v 2.0.1
+          bundle install --jobs=4 --retry=3 --path vendor/bundle
+    - save_cache:
+        paths:
+        - ./vendor/bundle
+        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+    # Database setup
+    - run:
+        name: Prepare db
+        command: |
+          bin/rails db:create db:schema:load --trace
+    # run tests!
+    - run:
+        name: Run rspec
+        command: |
+          mkdir /tmp/test-results
+          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+          bundle exec rspec --format progress --color --format documentation
+    # collect reports
+    - store_test_results:
+        path: /tmp/test-results
+    - store_artifacts:
+        path: /tmp/test-results
+        destination: test-results
+
           
           
           
