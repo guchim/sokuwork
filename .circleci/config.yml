@@ -1,11 +1,16 @@
 version: 2.1
-jobs:
-  build:
+
+executors:
+  default_container:
     docker:
-      # specify the version you desire here
-      - image: circleci/ruby:2.6.3-node
+      - image: circleci/ruby:2.6.1-node
         environment:
           RAILS_ENV: test
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          BUNDLER_VERSION: 2.0.1
+          
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
