@@ -8,6 +8,14 @@ ja:
       next: "次"
       truncate: "..."
   activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 氏名
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -24,7 +32,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -50,7 +58,7 @@ ja:
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -212,5 +220,3 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
-    
-  
