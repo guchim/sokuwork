@@ -16,6 +16,25 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+        phone_number: 電話番号
+      company:
+        name: 会社名
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        phone_number: 電話番号
+      offer:
+        title: タイトル
+        date: 日付
+        start_time: 出勤時間
+        end_time: 退勤時間
+        contents: 仕事内容
+        cautions: 注意事項
+        payment: 報酬
+        address: 出勤先の住所
+      user_profile:
+        introduction: 自己紹介文
+        profile_photo: プロフィール画像
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

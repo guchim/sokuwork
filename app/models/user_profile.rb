@@ -1,4 +1,5 @@
 class UserProfile < ApplicationRecord
     mount_uploader :profile_photo, ImageUploader
-    belongs_to:user
+    validates :introduction, length: { maximum: 200 }
+    belongs_to :user
 end
