@@ -13,4 +13,12 @@ development:
 test:
   <<: *default
   database: sokuwork_test
-  
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  database: sokuwork_production
+  username: admin
+  password:
+  socket: /var/lib/mysql/mysql.sock
