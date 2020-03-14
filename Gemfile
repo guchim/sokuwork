@@ -27,7 +27,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "rspec_junit_formatter"
   gem "rubocop-performance"
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.11.0'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'

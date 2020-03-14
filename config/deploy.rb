@@ -1,17 +1,17 @@
 # capistranoのバージョン固定
-lock '3.4.0'
+lock '3.11.2'
 
 # デプロイするアプリケーション名
 set :application, 'sokuwork'
 
 # cloneするgitのレポジトリ
-set :repo_url, 'https://github.com/guchim/sokuwork.git'
+set :repo_url, 'git@github.com:guchim/sokuwork.git'
 
 # deployするブランチ。デフォルトはmasterなのでなくても可。
 set :branch, 'master'
 
 # deploy先のディレクトリ。
-set :deploy_to, '/var'
+set :deploy_to, '/var/www/rails'
 
 # シンボリックリンクをはるファイル。(※後述)
 set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
