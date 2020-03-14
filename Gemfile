@@ -27,13 +27,14 @@ group :development, :test do
   gem "rspec-rails"
   gem "rspec_junit_formatter"
   gem "rubocop-performance"
-  gem 'capistrano', '~> 3.11.0'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
-group :production, :staging do
+group :production do
   gem 'unicorn'
 end
 
