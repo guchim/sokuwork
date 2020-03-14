@@ -2,7 +2,7 @@
 app_path = File.expand_path('../../../', __FILE__)
 
 #アプリケーションサーバの性能を決定する
-#worker_processes 1
+worker_processes 1
 
 #アプリケーションの設置されているディレクトリを指定。currentを指定します。
 working_directory "#{app_path}/current"
