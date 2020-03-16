@@ -2,6 +2,9 @@
 # Gem.lockファイル内にcapstranoのバージョンの記載あり
 lock '3.11.2'
 
+set :linked_files, fetch(:linked_files, []).push("config/master.key")
+
+set :deploy_to, '/var/www/sokuwork'
 # Capistranoのログの表示に利用する
 set :application, 'sokuwork'
 
