@@ -18,7 +18,8 @@ production:
   adapter: mysql2
   encoding: utf8
   pool: 5
-  database: sokuwork_production
-  username: admin
-  password:
   socket: /var/lib/mysql/mysql.sock
+  host:     <%= Rails.application.credentials.db[:host] %>
+  database: <%= Rails.application.credentials.db[:database] %>
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
