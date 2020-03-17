@@ -2,9 +2,8 @@
 # Gem.lockファイル内にcapstranoのバージョンの記載あり
 lock '3.11.2'
 
-set :linked_files, fetch(:linked_files, []).push("config/master.key")
-
 set :deploy_to, '/var/www/sokuwork'
+
 # Capistranoのログの表示に利用する
 set :application, 'sokuwork'
 
@@ -13,13 +12,13 @@ set :repo_url,  'git@github.com:guchim/sokuwork.git'
 
 # バージョンが変わっても共通で参照するディレクトリを指定
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_files, fetch(:linked_files, []).push("config/master.key")
 
+#ターミナル上、ruby -vでチェックできます。
 set :rbenv_type, :user
 set :rbenv_ruby, '2.6.3'
-#ターミナル上、ruby -vでチェックできます。
 
 # どの公開鍵を利用してデプロイするか。
-# パスはターミナルでcd .sshに移動後、lsコマンドで確認できます。
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/id_aws_rsa']
 
@@ -31,21 +30,38 @@ set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 set :keep_releases, 5
 
 
-set :linked_files, %w{ config/master.key }
-
-after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
+  desc 'Restart application'
   task :restart do
     invoke 'unicorn:restart'
   end
 
-  desc 'upload master.key'
-  task :upload do
-    on roles(:app) do |_host|
-      execute "mkdir -p #{shared_path}/config" if test "[ ! -d #{shared_path}/config ]"
-      # upload!('config/master.key', "#{shared_path}/config/master.key")
+  desc 'Create database'
+  task :db_create do
+    on roles(:db) do |host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:create'
+        end
+      end
     end
   end
-  before :starting, 'deploy:upload'
-  after :finishing, 'deploy:cleanup'
+
+  desc 'Run seed'
+  task :seed do
+    on roles(:app) do
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:seed'
+        end
+      end
+    end
+  end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+    end
+  end
 end
