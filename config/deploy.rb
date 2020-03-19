@@ -29,6 +29,19 @@ set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 set :keep_releases, 5
 
+#AWSのELB(Elastic+Load+Balancing)配下にあるEC2インスタンスを取得
+require 'aws-sdk'
+
+AWS.config({
+  :access_key_id     => ENV["AWS_ACCESS_KEY_ID"],
+  :secret_access_key => ENV["AWS_SECRET_ACCESS_KEY"],
+  :ec2_endpoint      => "ec2.ap-northeast-1.amazonaws.com",
+  :elb_endpoint      => "elasticloadbalancing.ap-northeast-1.amazonaws.com"
+})
+elb = AWS::ELB.new.load_balancers['terrarform-on-docker-alb']
+instances = elb.instances.select {|i| i.exists? && i.status == :running}.map(&:dns_name)
+
+role :app, *instances
 
 namespace :deploy do
   desc 'Restart application'
