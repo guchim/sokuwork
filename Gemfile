@@ -35,7 +35,7 @@ group :development, :test do
   gem 'bcrypt_pbkdf'
 end
 
-group :production do
+group :production, :staging do
   gem 'unicorn', '5.4.1'
 end
 
@@ -50,6 +50,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
+  gem 'aws-sdk'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
