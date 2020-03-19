@@ -30,7 +30,6 @@ set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 set :keep_releases, 5
 
 #AWSのELB(Elastic+Load+Balancing)配下にあるEC2インスタンスを取得
-require 'aws-sdk'
 
 AWS.config({
   :access_key_id     => ENV["AWS_ACCESS_KEY_ID"],
