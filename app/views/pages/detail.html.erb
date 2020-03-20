@@ -1,19 +1,18 @@
-<div class="container col-lg-8">
-    <div class="card detail-card">
-      <div class="card-header bg-warning">
-        <%=@offer.title%>
-      </div>
-      <div class="card-body">
+<div class="container col-lg-9">
+        <div class="card detail-image-card">
+          <img src="<%= @offer.images.to_s%>" class="detail-image">
+        </div>
+        <h4 class="detail-title"><%=@offer.title%></h4>
         <span class="badge badge-success"><%=@offer.category.name%></span>
         <%@offer.offer_walfares.each do |offer_walfare|%>
         <span class="badge badge-success">
             <%=offer_walfare.walfare.name%>
         </span>
         <%end%>
-        <table class="table table-bordered col-lg-10">
+        <table class="table table-bordered">
           <tbody>
             <tr>
-              <th class="text-nowrap">日時</th>
+              <th class="text-nowrap" style="width: 120px">日時</th>
               <td><%=@offer.date.strftime("%Y年%m月%d日")%><br><%= @offer.start_time%>〜<%= @offer.end_time%></td>
             </tr>
             <tr>
@@ -33,7 +32,7 @@
               <td><%=simple_format(@offer.conditions)%></td>
             </tr>
             <tr>
-              <th>住所</th>
+              <th>勤務先住所</th>
               <td><%=@offer.address%></td>
             </tr>
             <tr>
@@ -57,7 +56,5 @@
             <a href="/users/sign_in", class="btn btn-primary submit-button">応募する</a>
           <%end%>
         </div>
-      </div>
-    </div>
 </div>
 <a href="/search"><<戻る</a>

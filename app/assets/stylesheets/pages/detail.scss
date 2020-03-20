@@ -3,11 +3,21 @@
     background-color: #99FFFF;
 }
 
-.detail-card{
-    margin: 20px 0 30px 0;
-    padding: 0 0 30px 0;
-}
-
 .submit-button{
     margin-top: -60px;
+}
+
+.detail-image{
+    width: 100%;
+    max-height: 450px;
+    height: auto;
+}
+
+.detail-image-card{
+    margin-top: 20px
+}
+
+.detail-title{
+    margin-top: 20px;
+    font-weight: bold;
 }
