@@ -1,4 +1,4 @@
-coding utf-8
+# coding: utf-8
 
 Category.find_or_create_by(name:"飲食・フード")
 Category.find_or_create_by(name:"接客・サービス")
