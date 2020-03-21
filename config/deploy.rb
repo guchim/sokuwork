@@ -47,6 +47,13 @@ namespace :deploy do
   before :starting, 'deploy:upload'
   after :finishing, 'deploy:cleanup'
 
+  set :default_env, {
+    rbenv_root: "/usr/local/rbenv",
+    path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH",
+    AWS_ACCESS_KEY_ID: ENV["AWS_ACCESS_KEY_ID"],
+    AWS_SECRET_ACCESS_KEY: ENV["AWS_SECRET_ACCESS_KEY"]
+  }
+
   desc 'Create database'
   task :db_create do
     on roles(:db) do |host|
