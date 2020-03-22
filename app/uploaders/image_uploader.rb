@@ -14,7 +14,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # 画像をリサイズする設定
   process resize_to_limit: [300,200]
-  
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -50,6 +50,4 @@ class ImageUploader < CarrierWave::Uploader::Base
       name.downcase
     end
   end
-
-　
 end
