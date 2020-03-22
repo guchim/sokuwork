@@ -27,7 +27,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 　
   # リサイズ
-  process resize_to_fill: [200, 200, 'Center']
+  process resize_to_limit: [100, 100]
 
   # JPGで保存
   process convert: 'jpg'
