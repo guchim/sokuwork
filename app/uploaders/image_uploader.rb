@@ -11,8 +11,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   else
     storage :fog
   end
+
   # 画像をリサイズする設定
   process resize_to_limit: [300,200]
+  
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -27,8 +29,27 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   end
 
-  def extension_whitelist
-    %w(jpg jpeg gif png)
+  # PNGで保存
+  process convert: 'png'
+
+  # jpg,jpeg,gif,pngのみ
+  def extension_white_list
+    %w[jpg jpeg gif png]
   end
 
+  # ファイル名を変更し拡張子を同じにする
+  def filename
+    super.chomp(File.extname(super)) + '.png'
+  end
+
+  # 日付で保存
+  def filename
+    if original_filename.present?
+      time = Time.now
+      name = time.strftime('%Y%m%d%H%M%S') + '.png'
+      name.downcase
+    end
+  end
+
+　
 end
