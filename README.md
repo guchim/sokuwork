@@ -26,5 +26,5 @@
 
 
 # クラウドアーキテクチャ
-
+![Untitled Diagram (1)](https://user-images.githubusercontent.com/54785182/77249271-37befb00-6c83-11ea-9e5a-5d416c4233f8.png)
 # 機能一覧、使用したGemなど
