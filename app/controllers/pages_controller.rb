@@ -4,7 +4,7 @@ class PagesController < ApplicationController
             @user_profile = UserProfile.find_by(user_id: current_user.id)
         end
     end
-    
+
     def search
         if user_signed_in?
             @user_profile = UserProfile.find_by(user_id: current_user.id)
@@ -12,11 +12,11 @@ class PagesController < ApplicationController
         end
         @q = Offer.ransack(params[:q])
         @offer = @q.result(distinct: true)
-        @offers = @offer.page(params[:page]).per(3)
+        @offers = @offer.page(params[:page]).per(12)
         @categories = Category.all
         @walfares = Walfare.all
     end
-    
+
     def detail
         @offer = Offer.find(params["id"])
         if user_signed_in?
@@ -24,7 +24,7 @@ class PagesController < ApplicationController
           @user = current_user
         end
     end
-    
+
     def create
         @offer = Offer.find(params["id"])
         applicant = Applicant.create(applicant_params)
@@ -34,9 +34,9 @@ class PagesController < ApplicationController
         applicant.save
         redirect_to "/search"
     end
-    
+
     private
-    
+
     def applicant_params
         params.require(:applicants).permit(:name,:photo,:introduction,:user_id,:company_id,:offer_id,:phone_number,:gender,:birthday)
     end
