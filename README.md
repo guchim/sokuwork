@@ -4,7 +4,7 @@
 ![スクリーンショット 2020-03-02 23 36 38](https://user-images.githubusercontent.com/54785182/75742784-16d54b00-5d52-11ea-8671-bf4262f81af0.png)
 
 # リンク
-http://sokuwork.xyz/
+http://sokuwork.xyz/<br>
 ログインページの下部の、テストログインボタンから、サンプルユーザーとしてログインできます。
 
 # 使用技術
