@@ -24,8 +24,8 @@ http://sokuwork.xyz/<br>
 - Docker
 - CircleCI
 - capistrano
-- Github
 - Terraform
+- rspec(更新中)
 
 
 # クラウドアーキテクチャ
@@ -37,4 +37,5 @@ http://sokuwork.xyz/<br>
 - 求人募集要項、作成/削除機能
 - 求人募集要項、詳細表示機能
 - 募集要項検索機能（ransack）
-- ページネーション（kaminari）
+- ページネーション（kaminari）<br>
+その他機能は随時更新していきます
