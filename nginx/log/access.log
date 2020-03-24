@@ -598,3 +598,6 @@
 172.22.0.1 - - [23/Mar/2020:10:47:13 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
 172.22.0.1 - - [23/Mar/2020:10:47:29 +0000] "GET /companies/sign_in HTTP/1.1" 200 10098 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
 172.22.0.1 - - [23/Mar/2020:10:47:33 +0000] "GET /companies/sign_up HTTP/1.1" 200 10044 "http://localhost/companies/sign_in" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+172.22.0.1 - - [23/Mar/2020:11:31:47 +0000] "GET /search HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+172.22.0.1 - - [23/Mar/2020:12:03:08 +0000] "GET /search HTTP/1.1" 200 13603 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+172.22.0.1 - - [23/Mar/2020:12:03:10 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://localhost/search" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
