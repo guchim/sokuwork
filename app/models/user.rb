@@ -10,6 +10,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }
   validates :email, uniqueness: true
   enum gender: { 男性: 0, 女性: 1, その他: 2 }
-  has_one :user_profile
-  has_many :applicants
+  has_one :user_profile, dependent: :destroy
+  has_many :applicants, dependent: :destroy
 end

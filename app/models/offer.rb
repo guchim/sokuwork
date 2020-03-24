@@ -5,9 +5,9 @@ class Offer < ApplicationRecord
   validates :images, presence: true
   belongs_to :category
   belongs_to :company
-  has_many :offer_walfares
-  has_many :applicants
-  has_many :walfares, through: :offer_walfares
+  has_many :offer_walfares, dependent: :destroy
+  has_many :applicants, dependent: :destroy
+  has_many :walfares, through: :offer_walfares, dependent: :destroy
   validates :title, presence: true, length: { maximum: 50 }
   validates :date, presence: true
   validates :start_time, presence: true

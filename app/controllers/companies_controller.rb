@@ -33,7 +33,7 @@ class CompaniesController < ApplicationController
 
   def edit
     @offer = Offer.find(params['id'])
-    @offer.images.cache! unless @offer.images.blank?
+    @offer.images.cache! if @offer.images.blank?
     @categories = Category.all
   end
 
@@ -46,6 +46,10 @@ class CompaniesController < ApplicationController
   private
 
   def offer_params
-    params.require(:offers).permit(:images, :image_cache, :category_id, :title, :date, :start_time, :end_time, :contents, :cautions, :payment, :address, :access, :belongings, :conditions, { walfare_ids: [] })
+    params.require(:offers).permit(:images, :image_cache, :category_id,
+                                   :title, :date, :start_time, :end_time,
+                                   :contents, :cautions, :payment, :address,
+                                   :access, :belongings, :conditions,
+                                   { walfare_ids: [] })
   end
 end

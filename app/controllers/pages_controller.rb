@@ -2,9 +2,9 @@
 
 class PagesController < ApplicationController
   def home
-    if user_signed_in?
-      @user_profile = UserProfile.find_by(user_id: current_user.id)
-    end
+    return unless user_signed_in?
+
+    @user_profile = UserProfile.find_by(user_id: current_user.id)
   end
 
   def search
@@ -21,10 +21,10 @@ class PagesController < ApplicationController
 
   def detail
     @offer = Offer.find(params['id'])
-    if user_signed_in?
-      @user_profile = UserProfile.find_by(user_id: current_user.id)
-      @user = current_user
-    end
+    return unless user_signed_in?
+
+    @user_profile = UserProfile.find_by(user_id: current_user.id)
+    @user = current_user
   end
 
   def create
@@ -40,6 +40,8 @@ class PagesController < ApplicationController
   private
 
   def applicant_params
-    params.require(:applicants).permit(:name, :photo, :introduction, :user_id, :company_id, :offer_id, :phone_number, :gender, :birthday)
+    params.require(:applicants).permit(:name, :photo, :introduction,
+                                       :user_id, :company_id, :offer_id,
+                                       :phone_number, :gender, :birthday)
   end
 end

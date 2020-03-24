@@ -10,5 +10,5 @@ class Company < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }
   validates :email, uniqueness: true
   has_many :offers, dependent: :destroy
-  has_many :applicants
+  has_many :applicants, dependent: :destroy
 end
