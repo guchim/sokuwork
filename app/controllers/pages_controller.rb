@@ -32,7 +32,7 @@ class PagesController < ApplicationController
         applicant.user_id = current_user.id
         applicant.offer_id = @offer.id
         applicant.save
-        redirect_to "/search"
+        redirect_to "/search", notice: "応募が完了しました"
     end
 
     private

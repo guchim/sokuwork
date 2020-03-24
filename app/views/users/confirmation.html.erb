@@ -21,11 +21,11 @@
                 <%@offers.each do |offer|%>
                 <div class="card confirmation-card">
                   <h5 class="card-header bg-warning"><%=offer.title%></h5>
-                  <div class="card-body">
+                   <div class="card-body">
                     <table class="table table-bordered">
                       <tbody>
                         <tr>
-                          <th class="text-nowrap">日時</th>
+                          <th class="text-nowrap" style="width: 120px">日時</th>
                           <td><%=offer.date.strftime("%Y年%m月%d日")%><br><%= offer.start_time%>〜<%= offer.end_time%></td>
                         </tr>
                         <tr>
@@ -58,7 +58,4 @@
                 <%end%>
               </div>
             </div>
-          </form>
         </div>
-    </div>
-</div>
