@@ -59,14 +59,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
     pages_search_path
   end
-  
-  def after_account_update_path_for(resource)
+
+  def after_account_update_path_for(_resource)
     edit_path
   end
-  
+
   def edit
     @user_profile = UserProfile.find_by(user_id: current_user.id)
   end

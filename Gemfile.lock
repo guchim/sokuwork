@@ -282,6 +282,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-performance (1.5.2)
       rubocop (>= 0.71.0)
+    rubocop-rails (2.5.0)
+      activesupport
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
     rubocop-rspec (1.38.1)
       rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
@@ -390,7 +394,9 @@ DEPENDENCIES
   ransack
   rspec-rails
   rspec_junit_formatter
+  rubocop
   rubocop-performance
+  rubocop-rails
   sass-rails (~> 5.0)
   spring
   spring-commands-rspec

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -7,7 +9,7 @@ class User < ApplicationRecord
   validates :phone_number, presence: true, uniqueness: true, length: { maximum: 11 }
   validates :password, presence: true, length: { minimum: 8 }
   validates :email, uniqueness: true
-  enum gender: { 男性: 0, 女性: 1, その他: 2}
-  has_one:user_profile
-  has_many:applicants
+  enum gender: { 男性: 0, 女性: 1, その他: 2 }
+  has_one :user_profile
+  has_many :applicants
 end
