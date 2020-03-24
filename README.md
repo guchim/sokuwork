@@ -23,10 +23,10 @@ http://sokuwork.xyz/<br>
   - ACM（証明書取得中）
 - Docker
 - CircleCI
-- ansible
-- capistrano
+- Ansible
+- Capistrano
 - Terraform
-- rspec(更新中)
+- RSpec(テスト更新中)
 
 
 # クラウドアーキテクチャ
