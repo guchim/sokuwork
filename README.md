@@ -23,6 +23,7 @@ http://sokuwork.xyz/<br>
   - ACM（証明書取得中）
 - Docker
 - CircleCI
+- ansible
 - capistrano
 - Terraform
 - rspec(更新中)
