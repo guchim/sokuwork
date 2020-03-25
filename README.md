@@ -13,6 +13,7 @@ http://sokuwork.xyz/<br>
 - Ruby on Rails 5.2.4.1
 - MySQL2
 - Nginx
+- unicorn
 - AWS
   - VPC
   - EC2
@@ -22,10 +23,10 @@ http://sokuwork.xyz/<br>
   - Route53
   - ACM（証明書取得中）
 - Docker
-- CircleCI
-- Ansible
-- Capistrano
 - Terraform
+- Ansible
+- CircleCI
+- Capistrano
 - RSpec(テスト更新中)
 
 
