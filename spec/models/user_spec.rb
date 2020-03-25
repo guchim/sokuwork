@@ -60,23 +60,6 @@ RSpec.describe User, type: :model do
     expect(user.errors[:email]).to include('はすでに存在します')
   end
 
-  it '重複した電話番号なら無効な状態であること' do
-    User.create(
-      name: 'Joe Tester',
-      email: 'test@example.com',
-      password: 'dottle-nouveau-pavilion-tights-furze',
-      phone_number: '09012345678'
-    )
-    user = User.new(
-      name: 'Jane Tester',
-      email: 'tester@example.com',
-      password: 'dottle-nouveau-pavilion-tights-furze',
-      phone_number: '09012345678'
-    )
-    user.valid?
-    expect(user.errors[:phone_number]).to include('はすでに存在します')
-  end
-
   it 'nameが20文字以下なら登録できること' do
     user = User.new(
       name: 'aaaaaaaaaaaaaaaaaaaa',
