@@ -100,6 +100,19 @@ jobs:
           path: ~/tmp/test-results
           destination: test-results
 
+      # capistrano
+      - add_ssh_keys:
+          fingerprints:
+            - "3b:c3:f8:50:2f:43:5c:6e:2f:f4:f1:6b:c3:c2:38:d3"
+
+      - deploy:
+          name: Capistrano deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" != "master" ]; then
+              exit 0
+            fi
+            bundle exec cap production deploy
+
 workflows:
   build:
     jobs:
