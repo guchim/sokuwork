@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # 企業ページ
   get 'companies/confirmation', to: 'companies#confirmation'
   get '/companies/review', to: 'companies#review'
-  get '/companies/show', to: 'companies#show'
+  get '/companies/show', to: 'companies#show', as: 'companies_show'
   # 募集ページ
   get '/companies/offer', to: 'companies#offer'
   post '/companies/create', to: 'companies#create'
