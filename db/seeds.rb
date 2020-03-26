@@ -24,6 +24,6 @@ User.create!(
 Company.create!(
   email: 'test-Company@example.com',
   password: 'adminpass',
-  name: '東京ライブ実行会',
+  name: 'テストカンパニー',
   phone_number: '00011112222'
 )
