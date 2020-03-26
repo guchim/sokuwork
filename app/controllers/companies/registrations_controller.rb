@@ -61,7 +61,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   # end
 
   def after_sign_up_path_for(_resource)
-    companies_show_path
+    '/companies/show'
   end
 
   def after_account_update_path_for(_resource)
