@@ -3,7 +3,6 @@
 class UsersController < ApplicationController
   def profile
     @user_profile = UserProfile.find_or_initialize_by(user_id: current_user.id)
-    @user_profile.profile_photo.cache! if @user_profile.profile_photo.blank?
   end
 
   def update
