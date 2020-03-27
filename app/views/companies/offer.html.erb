@@ -1,6 +1,5 @@
 <div class="container">
     <h2 class="copy">求人募集作成ページ</h2>
-    <%= render 'layouts/error_messages', model: f.object %>
     <%= form_with scope: :offers, url: "/companies/create" do |f| %>
         <div class="form-group">
             <p>掲載する画像</p>
