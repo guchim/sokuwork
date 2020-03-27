@@ -11,7 +11,7 @@ Walfare.find_or_create_by(name: 'バイク/車通勤可')
 Walfare.find_or_create_by(name: '服装自由')
 Walfare.find_or_create_by(name: 'クーポンGET')
 Walfare.find_or_create_by(name: 'まかないあり')
-Walfare.find_or_create_by(name: '髪型/服装自由')
+Walfare.find_or_create_by(name: '髪型/カラー自由')
 Walfare.find_or_create_by(name: '交通費支給')
 User.create!(
   email: 'test-user@example.com',
