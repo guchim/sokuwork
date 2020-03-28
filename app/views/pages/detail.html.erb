@@ -44,15 +44,6 @@
         <div class="applicaton-button text-right">
           <%if user_signed_in?%>
             <%=form_with scope: :applicants, url: "/pages/create/"+@offer.id.to_s, local: true do |f|%>
-              <%= f.hidden_field :name, value: @user.name%>
-              <%= f.hidden_field :phone_number, value: @user.phone_number%>
-              <%= f.hidden_field :birthday, value: @user.birthday%>
-              <%= f.hidden_field :gender, value: @user.gender%>
-              <% if @user_profile.present?%>
-                <%= f.hidden_field :photo, value: @user_profile.profile_photo%>
-                <%= f.hidden_field :introduction, value: @user_profile.introduction%>
-              <%else%>
-              <%end%>
               <%= f.submit "応募する", class: "btn btn-primary submit-button" %>
             <% end %>
           <%else%>

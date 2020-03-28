@@ -30,8 +30,8 @@ class PagesController < ApplicationController
   def create
     @offer = Offer.find(params['id'])
     applicant = Applicant.create(applicant_params)
-    applicant.company_id = @offer.company_id
     applicant.user_id = current_user.id
+    applicant.company_id = @offer.company_id
     applicant.offer_id = @offer.id
     applicant.save
     redirect_to '/search', notice: '応募が完了しました'
@@ -40,8 +40,6 @@ class PagesController < ApplicationController
   private
 
   def applicant_params
-    params.require(:applicants).permit(:name, :photo, :introduction,
-                                       :user_id, :company_id, :offer_id,
-                                       :phone_number, :gender, :birthday)
+    params.permit(:user_id, :offer_id, :company_id)
   end
 end
