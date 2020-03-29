@@ -3,7 +3,7 @@
 class CompaniesController < ApplicationController
   def show
     @company = current_company
-    @offers = @company.offers
+    @offers = @company.offers.order(created_at: :desc)
   end
 
   def confirmation
