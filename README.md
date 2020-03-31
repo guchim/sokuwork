@@ -20,10 +20,9 @@
   - S3
   - ALB
   - Route53
-  - ACM（証明書取得中）
+  - ACM
 - Docker
 - Terraform
-- Ansible
 - CircleCI
 - Capistrano
 - RSpec(テスト更新中)
