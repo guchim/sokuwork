@@ -23,10 +23,10 @@
                   <h5 class="card-header"><%=a.offer.title%>への応募</h5>
                   <div class="card-body">
                     <div class="media">
-                        <%if a.user.user_profiles.nil? %>
+                        <%if a.user.user_profile.nil? %>
                           <img src="/assets/unknown.jpg" class="mb-3 user_photo">
                         <%else%>
-                          <%=image_tag a.user.user_profiles.profile_photo.to_s, class:"user_photo"%>
+                          <%=image_tag a.user.user_profile.profile_photo.to_s, class:"user_photo"%>
                         <%end%>
                         <div class="media-body">
                             <h5 class="mt-0">
