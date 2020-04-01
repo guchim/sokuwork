@@ -3,12 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it '氏名、メールアドレス、パスワード、電話番号があれば有効な状態であること' do
+  it '氏名、メールアドレス、パスワード、電話番号、性別、生年月日があれば有効な状態であること' do
     user = User.new(
       name: 'Aaron',
       email: 'tester@example.com',
       password: 'dottle-nouveau-pavilion-tights-furze',
-      phone_number: '09012345678'
+      phone_number: '09012345678',
+      gender: '男性',
+      birthday: '2000-01-01'
     )
     expect(user).to be_valid
   end
@@ -48,7 +50,9 @@ RSpec.describe User, type: :model do
       name: 'Joe Tester',
       email: 'tester@example.com',
       password: 'dottle-nouveau-pavilion-tights-furze',
-      phone_number: '09011223344'
+      phone_number: '09011223344',
+      gender: '男性',
+      birthday: '2000-01-01'
     )
     user = User.new(
       name: 'Jane Tester',
@@ -65,7 +69,9 @@ RSpec.describe User, type: :model do
       name: 'aaaaaaaaaaaaaaaaaaaa',
       email: 'tester@example.com',
       password: 'dottle-nouveau-pavilion-tights-furze',
-      phone_number: '09012345678'
+      phone_number: '09012345678',
+      gender: '男性',
+      birthday: '2000-01-01'
     )
     expect(user).to be_valid
   end
@@ -87,7 +93,9 @@ RSpec.describe User, type: :model do
       name: 'Aaron',
       email: 'tester@example.com',
       password: 'password',
-      phone_number: '09012345678'
+      phone_number: '09012345678',
+      gender: '男性',
+      birthday: '2000-01-01'
     )
     expect(user).to be_valid
   end
@@ -96,5 +104,17 @@ RSpec.describe User, type: :model do
     user = User.new(password: '0000000', password_confirmation: '0000000')
     user.valid?
     expect(user.errors[:password]).to include('は8文字以上で入力してください')
+  end
+
+  it '性別が選択されていなければ無効な状態であること' do
+    user = User.new(gender: nil)
+    user.valid?
+    expect(user.errors[:gender]).to include('を入力してください')
+  end
+
+  it '生年月日がなければ無効な状態であること' do
+    user = User.new(birthday: nil)
+    user.valid?
+    expect(user.errors[:birthday]).to include('を入力してください')
   end
 end

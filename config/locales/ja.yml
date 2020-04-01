@@ -17,6 +17,8 @@ ja:
         password: パスワード
         password_confirmation: 確認用パスワード
         phone_number: 電話番号
+        gender: 性別
+        birthday: 生年月日
       company:
         name: 会社名
         email: メールアドレス
