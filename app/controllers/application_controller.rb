@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:gender])
     devise_parameter_sanitizer.permit(:account_update, keys: [:gender])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:birthday])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:birthday])
   end
 
   after_action :store_location

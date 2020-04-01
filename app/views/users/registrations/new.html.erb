@@ -14,7 +14,7 @@
 
         <div class="form-group">
           <%=label_tag "email", "メールアドレス"%>
-          <%= f.email_field :email,id:"email", autofocus: true, placeholder: "sokuwork@gmail.com", class: "form-control" %>
+          <%= f.email_field :email, id:"email", autofocus: true, placeholder: "sokuwork@gmail.com", class: "form-control" %>
         </div>
 
         <div class="form-group">
@@ -33,8 +33,8 @@
         </div>
 
         <div class="form-group">
-            <%=label_tag "birthday", "生年月日"%>
-            <%=f.date_field :birthday, id:"birthday", class:"form-control"%>
+          <%=label_tag "birthday", "生年月日"%>
+          <%= f.date_field :birthday, id:"birthday", class:"form-control"%>
         </div>
 
         <div class="form-group">
