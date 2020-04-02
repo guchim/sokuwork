@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user_profile = UserProfile.find_by(user_id: current_user.id)
     @applicants = Applicant.where(user_id: current_user.id)
     @offer_id = @applicants.pluck(:offer_id)
-    @offers = Offer.where(id: @offer_id)
+    @offers = Offer.where(id: @offer_id).page(params[:page]).per(5).order(created_at: :desc)
   end
 
   private

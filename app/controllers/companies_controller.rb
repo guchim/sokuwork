@@ -7,7 +7,7 @@ class CompaniesController < ApplicationController
   end
 
   def confirmation
-    @applicants = Applicant.where(company_id: current_company.id).order(created_at: :desc)
+    @applicants = Applicant.where(company_id: current_company.id).page(params[:page]).per(5).order(created_at: :desc)
     @date_format = '%Y%m%d'
   end
 
