@@ -1,7 +1,7 @@
 <div class="container">
 
     <h3 class="copy">【<%=@company.name%>様】掲載中の求人</h3>
-    
+
     <div class="offer-list">
         <div class="row">
           <% @offers.each do |offer| %>
@@ -22,5 +22,5 @@
           <%end%>
         </div>
     </div>
-        
+    <div class="pagenation"><%= paginate @offers %></div>
 </div>

@@ -3,7 +3,7 @@
 class CompaniesController < ApplicationController
   def show
     @company = current_company
-    @offers = @company.offers.order(created_at: :desc)
+    @offers = @company.offers.page(params[:page]).per(9).order(created_at: :desc)
   end
 
   def confirmation
