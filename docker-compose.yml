@@ -1,9 +1,8 @@
 # docker-compose.yml
 # 開発環境用のdocker-compose
-version: '3.2'
+version: '3'
 services:
  database:
-   restart: always
    image: mysql:5.7
    ports:
      - 3306:3306
@@ -15,21 +14,21 @@ services:
    build:
      context: .
      dockerfile: ./docker/rails/Dockerfile
-   command: >
-     bash -c "
-       yarn install --check-files &&
-       rm -f tmp/pids/server.pid &&
-       bundle install --quiet &&
-       bundle exec rails db:migrate:reset &&
-       bundle exec rails db:seed &&
-       bundle exec rails s -p 3000 -b '0.0.0.0'
-     "
+   command: bundle exec rails s -p 3000 -b '0.0.0.0'
    ports:
      - "3000:3000"
    volumes:
      - .:/sokuwork
-     - "bundle:/usr/local/bundle"
-   depends_on:
+     - bundle:/usr/local/bundle
+   tty: true
+   environment:
+     EDITOR: vim
+     RAILS_MAX_THREADS: 5
+     MYSQL_USERNAME: root
+     MYSQL_PASSWORD: root
+     MYSQL_HOST: database
+     RAILS_MASTER_KEY: 9fef6c1b0c2c49b395d955c6dbdcea72
+   links:
      - database
  server:
    build:
